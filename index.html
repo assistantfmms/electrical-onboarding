@@ -6,14 +6,14 @@
   <title>Jim's Electrical Franchisee Onboarding</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
     body {
       font-family: Arial, Helvetica, sans-serif;
       background: #1a1a2e;
       min-height: 100vh;
       padding: 20px;
     }
-
+ 
     .page-wrap {
       max-width: 960px;
       margin: 0 auto;
@@ -22,7 +22,7 @@
       padding: 28px 32px 40px;
       box-shadow: 0 4px 24px rgba(0,0,0,0.4);
     }
-
+ 
     /* ── Header ── */
     .page-header {
       display: flex;
@@ -44,7 +44,7 @@
       font-size: 14px;
       color: rgba(255,255,255,0.85);
     }
-
+ 
     /* ── Section headings ── */
     .section-heading {
       font-size: 17px;
@@ -55,7 +55,7 @@
       margin: 28px 0 16px;
     }
     .section-heading:first-of-type { margin-top: 0; }
-
+ 
     /* ── 3-column field grid ── */
     .field-grid {
       display: grid;
@@ -65,7 +65,7 @@
     .field-grid .col-2 { grid-column: span 2; }
     .field-grid .col-3 { grid-column: span 3; }
     .field-grid .col-1 { grid-column: span 1; }
-
+ 
     .field-group {
       display: flex;
       flex-direction: column;
@@ -75,7 +75,7 @@
       font-size: 13px;
       color: rgba(255,255,255,0.9);
     }
-
+ 
     input[type="text"],
     input[type="email"],
     input[type="tel"],
@@ -95,7 +95,7 @@
       outline-offset: 1px;
     }
     input[type="date"] { color: #555; }
-
+ 
     /* ── Uploads ── */
     .uploads-note {
       font-size: 13px;
@@ -103,9 +103,9 @@
       margin-bottom: 12px;
       line-height: 1.5;
     }
-
+ 
     .upload-list { display: flex; flex-direction: column; gap: 2px; }
-
+ 
     .upload-row {
       background: #0f4c8a;
       border: 1px dashed rgba(255,255,255,0.3);
@@ -146,7 +146,7 @@
       pointer-events: none;
     }
     .upload-row-right.chosen { color: #a5d6a7; font-style: italic; }
-
+ 
     /* ── Uniform hint ── */
     .uniform-hint {
       display: none;
@@ -159,7 +159,28 @@
       color: #f9a825;
       font-weight: bold;
     }
-
+ 
+    /* ── Status banner ── */
+    .status-banner {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .status-banner.submitting {
+      display: block;
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+    .status-banner.error {
+      display: block;
+      background: rgba(183,28,28,0.25);
+      color: #ef9a9a;
+      border: 1px solid rgba(183,28,28,0.5);
+    }
+ 
     /* ── Submit ── */
     .submit-row {
       margin-top: 28px;
@@ -189,7 +210,8 @@
       transition: background 0.15s;
     }
     .btn-submit:hover { background: #f57f17; color: white; }
-
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+ 
     /* ── Toast ── */
     .toast {
       display: none;
@@ -205,7 +227,7 @@
       z-index: 9999;
     }
     .toast.show { display: block; }
-
+ 
     @media (max-width: 640px) {
       .field-grid { grid-template-columns: 1fr 1fr; }
       .field-grid .col-3 { grid-column: span 2; }
@@ -219,7 +241,7 @@
 </head>
 <body>
 <div class="page-wrap">
-
+ 
   <!-- Header -->
   <div class="page-header">
     <img src="https://c7qp5bn42g-maker.github.io/Franchisee-Portal/jims-electrical-logo.png"
@@ -233,9 +255,9 @@
       <p>Please complete all relevant sections and upload the required images.</p>
     </div>
   </div>
-
+ 
   <form id="onboardingForm" novalidate>
-
+ 
     <!-- Personal Details -->
     <div class="section-heading">Personal Details</div>
     <div class="field-grid">
@@ -264,7 +286,7 @@
         <input type="date" name="dob" />
       </div>
     </div>
-
+ 
     <!-- Residential Address -->
     <div class="section-heading">Residential Address</div>
     <div class="field-grid">
@@ -294,7 +316,7 @@
         </select>
       </div>
     </div>
-
+ 
     <!-- Postal Address -->
     <div class="section-heading">Postal Address - if different to residential</div>
     <div class="field-grid">
@@ -324,7 +346,7 @@
         </select>
       </div>
     </div>
-
+ 
     <!-- Emergency Contact -->
     <div class="section-heading">Emergency Contact</div>
     <div class="field-grid">
@@ -341,7 +363,7 @@
         <input type="text" name="emerg_relationship" />
       </div>
     </div>
-
+ 
     <!-- Business Details -->
     <div class="section-heading">Business Details</div>
     <div class="field-grid">
@@ -387,7 +409,7 @@
         <input type="text" name="director_2" />
       </div>
     </div>
-
+ 
     <!-- Licences & Registrations -->
     <div class="section-heading">Licences &amp; Registrations</div>
     <div class="field-grid">
@@ -416,7 +438,7 @@
         <input type="text" name="elec_contractor" />
       </div>
     </div>
-
+ 
     <!-- Vehicle Details -->
     <div class="section-heading">Vehicle Details</div>
     <div class="field-grid">
@@ -437,7 +459,7 @@
         <input type="text" name="veh_variant" />
       </div>
     </div>
-
+ 
     <!-- Uniform -->
     <div class="section-heading">Uniform</div>
     <div class="field-grid">
@@ -471,137 +493,162 @@
         Maximum 3 items total (shorts + pants combined).
       </div>
     </div>
-
+ 
     <!-- Required Uploads -->
     <div class="section-heading">Required uploads</div>
     <p class="uploads-note">Please upload clear photos or scans of each required document. If using a mobile you can take a picture of required document using phone camera.</p>
-
+ 
     <div class="upload-list">
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="licence_front" data-required="true" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Driver licence – front</div>
           <div class="upload-row-meta req">Image (required)</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="licence_back" data-required="true" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Driver licence – back</div>
           <div class="upload-row-meta req">Image (required)</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="vehicle_front" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Vehicle – front</div>
           <div class="upload-row-meta">Image</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="vehicle_driver_side" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Vehicle – driver side</div>
           <div class="upload-row-meta">Image</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="vehicle_rear" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Vehicle – rear</div>
           <div class="upload-row-meta">Image</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="vehicle_passenger_side" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Vehicle – passenger side</div>
           <div class="upload-row-meta">Image</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="white_card" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">White card</div>
           <div class="upload-row-meta">Image</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="open_registration" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Open registration</div>
           <div class="upload-row-meta">Image</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="sec_installer_licence" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Security installer licence</div>
           <div class="upload-row-meta">Image</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="sec_reseller_licence" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Security reseller licence</div>
           <div class="upload-row-meta">Image</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="elec_worker_licence" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Electrical worker licence</div>
           <div class="upload-row-meta">Image</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
       <div class="upload-row">
-        <input type="file" accept="image/*" onchange="fileChosen(this)" />
+        <input type="file" accept="image/*" data-label="elec_contractor_licence" onchange="fileChosen(this)" />
         <div class="upload-row-left">
           <div class="upload-row-title">Electrical contractor licence</div>
           <div class="upload-row-meta">Image</div>
         </div>
         <div class="upload-row-right">No file selected</div>
       </div>
-
+ 
     </div>
-
+ 
+    <div class="status-banner" id="statusBanner"></div>
+ 
     <!-- Submit -->
     <div class="submit-row">
       <button type="button" class="btn-clear" onclick="resetForm()">Clear form</button>
-      <button type="submit" class="btn-submit">Submit application</button>
+      <button type="submit" class="btn-submit" id="submitBtn">Submit application</button>
     </div>
-
+ 
   </form>
 </div>
-
+ 
 <div class="toast" id="toast">✓ Application submitted successfully!</div>
-
+ 
+<!-- Firebase v10 compat (CDN) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+ 
 <script>
+  // ── Firebase config — shared onboarding backend (proven working 30 Jun 2026).
+  //    Records are distinguished by the `division` field below.
+  //    If a dedicated Electrical Firebase project is recovered later,
+  //    swap this block only — nothing else changes. ──
+  const firebaseConfig = {
+    apiKey:            "AIzaSyCFq2sUvDfyNGVJDkpXdR0pm104L9tVr8o",
+    authDomain:        "antenna-franchisee-onboarding.firebaseapp.com",
+    projectId:         "antenna-franchisee-onboarding",
+    storageBucket:     "antenna-franchisee-onboarding.firebasestorage.app",
+    messagingSenderId: "213085964304",
+    appId:             "1:213085964304:web:9b3be2854982a6360de295"
+  };
+ 
+  firebase.initializeApp(firebaseConfig);
+  const db      = firebase.firestore();
+  const storage = firebase.storage();
+ 
+  // ── UI helpers ──
   function fileChosen(input) {
-    const row = input.closest('.upload-row');
+    const row   = input.closest('.upload-row');
     const right = row.querySelector('.upload-row-right');
     if (input.files && input.files[0]) {
       right.textContent = input.files[0].name;
@@ -611,7 +658,7 @@
       right.classList.remove('chosen');
     }
   }
-
+ 
   function resetForm() {
     document.getElementById('onboardingForm').reset();
     document.querySelectorAll('.upload-row-right').forEach(el => {
@@ -619,16 +666,17 @@
       el.classList.remove('chosen');
     });
     document.getElementById('uniform_hint').style.display = 'none';
+    setStatus('');
   }
-
+ 
   function updateUniformOptions() {
     const shortsEl = document.getElementById('num_shorts');
     const pantsEl  = document.getElementById('num_pants');
     const hint     = document.getElementById('uniform_hint');
-    const MAX = 3;
-    const shorts = parseInt(shortsEl.value) || 0;
-    const pants  = parseInt(pantsEl.value)  || 0;
-
+    const MAX      = 3;
+    const shorts   = parseInt(shortsEl.value) || 0;
+    const pants    = parseInt(pantsEl.value)  || 0;
+ 
     [shortsEl, pantsEl].forEach(sel => {
       const other = sel === shortsEl ? pants : shorts;
       Array.from(sel.options).forEach(opt => {
@@ -637,15 +685,94 @@
       });
       if (parseInt(sel.value) && (other + parseInt(sel.value)) > MAX) sel.value = '';
     });
-
+ 
     hint.style.display = (shorts + pants) > MAX ? 'block' : 'none';
   }
-
-  document.getElementById('onboardingForm').addEventListener('submit', function(e) {
+ 
+  function setStatus(type, msg) {
+    const banner = document.getElementById('statusBanner');
+    banner.className = 'status-banner' + (type ? ' ' + type : '');
+    banner.textContent = msg || '';
+    banner.style.display = type ? 'block' : 'none';
+  }
+ 
+  // ── Upload a single file to Firebase Storage, return download URL ──
+  async function uploadFile(file, submissionId, label) {
+    const ext  = file.name.split('.').pop();
+    const path = `franchisee-onboarding/${submissionId}/${label}.${ext}`;
+    const ref  = storage.ref(path);
+    await ref.put(file);
+    return await ref.getDownloadURL();
+  }
+ 
+  // ── Form submission ──
+  document.getElementById('onboardingForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3500);
+ 
+    // Enforce required uploads before doing anything else
+    const missing = [];
+    this.querySelectorAll('input[type="file"][data-required="true"]').forEach(input => {
+      if (!(input.files && input.files[0])) {
+        const title = input.closest('.upload-row').querySelector('.upload-row-title').textContent;
+        missing.push(title);
+      }
+    });
+    if (missing.length) {
+      setStatus('error', 'Required uploads missing: ' + missing.join(', ') + '.');
+      return;
+    }
+ 
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    setStatus('submitting', 'Uploading files and saving your application…');
+ 
+    try {
+      // Gather text fields
+      const fd   = new FormData(this);
+      const data = {};
+      fd.forEach((v, k) => { if (v && typeof v === 'string') data[k] = v; });
+      data.submitted_at = firebase.firestore.FieldValue.serverTimestamp();
+      data.division     = 'Electrical';
+ 
+      // Create a submission doc early so we have an ID for file paths
+      const docRef = db.collection('franchisee-onboarding').doc();
+      const submissionId = docRef.id;
+ 
+      // Upload all chosen files
+      const fileInputs = this.querySelectorAll('input[type="file"]');
+      const uploads    = [];
+      fileInputs.forEach(input => {
+        if (input.files && input.files[0]) {
+          const label = input.dataset.label;
+          uploads.push(
+            uploadFile(input.files[0], submissionId, label).then(url => {
+              data[label + '_url'] = url;
+            })
+          );
+        }
+      });
+      await Promise.all(uploads);
+ 
+      // Save to Firestore
+      await docRef.set(data);
+ 
+      // Success — only after a confirmed write
+      setStatus('');
+      submitBtn.disabled = false;
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+      this.reset();
+      document.querySelectorAll('.upload-row-right').forEach(el => {
+        el.textContent = 'No file selected';
+        el.classList.remove('chosen');
+      });
+ 
+    } catch (err) {
+      console.error(err);
+      submitBtn.disabled = false;
+      setStatus('error', 'Submission failed: ' + err.message + '. Please try again.');
+    }
   });
 </script>
 </body>
