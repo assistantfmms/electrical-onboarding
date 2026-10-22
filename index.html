@@ -751,6 +751,10 @@
 
       const submissionId = 'sub_' + Date.now() + '_' + Math.floor(1000 + Math.random() * 9000);
 
+      // CRM prospect ID from the personal link texted from the CRM (…/?p=1083), digits only.
+      // The intake flow uses it to link this application to the franchisee's CRM record.
+      const crmProspectId = (new URLSearchParams(window.location.search).get('p') || '').replace(/\D/g, '');
+
       // Legacy PascalCase schema — matches existing intake pipeline
       const data = {
         FirstName:                  g('first_name'),
@@ -798,6 +802,7 @@
         NumberPants:                g('num_pants'),
         Status:                     'New',
         SubmissionId:               submissionId,
+        CrmProspectId:              crmProspectId,
         CreatedAt:                  firebase.firestore.FieldValue.serverTimestamp(),
         Files:                      {}
       };
